@@ -1,0 +1,51 @@
+# ============================================
+# robots.txt — Вышивка Стиль
+# https://stylevishivka.ru/
+# ============================================
+
+User-agent: *
+Allow: /
+
+# ===== ЗАКРЫВАЕМ ОТ ИНДЕКСАЦИИ =====
+# (у нас пока нет таких разделов, но на будущее)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+# ===== ПЛОХИЕ БОТЫ =====
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# ===== ЯНДЕКС =====
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content
+Sitemap: https://stylevishivka.ru/sitemap.xml
+
+# ===== GOOGLE =====
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# ===== SITEMAP =====
+Sitemap: https://stylevishivka.ru/sitemap.xml
+
+# ===== ХОСТ =====
+Host: https://stylevishivka.ru
