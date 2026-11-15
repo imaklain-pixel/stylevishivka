@@ -15,16 +15,7 @@
     <meta property="og:description" content="Шевроны, логотипы, нашивки на одежду. Бесплатный расчёт за 15 минут." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://stylevishivka.ru/" />
-    <meta property="og:image" content="https://stylevishivka.ru/logo.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:site_name" content="Вышивка Стиль" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Брендирование одежды и шевроны на заказ" />
-    <meta name="twitter:description" content="Шевроны, логотипы, нашивки на одежду. Бесплатный расчёт за 15 минут." />
-    <meta name="twitter:image" content="https://stylevishivka.ru/logo.png" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/imaklain-pixel/Vishivka_Stile_/main/logo.png" />
 
     <script type="application/ld+json">
     {
@@ -35,21 +26,13 @@
       "url": "https://stylevishivka.ru/",
       "telephone": "+79014030785",
       "email": "svysivka@gmail.com",
-      "image": "https://stylevishivka.ru/logo.png",
-      "logo": "https://stylevishivka.ru/logo.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Москва",
-        "streetAddress": "ул. Исаковского, д. 20",
-        "addressCountry": "RU"
+        "streetAddress": "ул. Исаковского, д. 20"
       },
       "priceRange": "200–2000 ₽",
-      "openingHoursSpecification": [{
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      }],
+      "openingHours": "Mo-Fr 09:00-18:00",
       "hasMap": "https://yandex.ru/maps/org/vyshivka_stil/22709636031/",
       "sameAs": [
         "https://www.instagram.com/fancywork008/",
@@ -64,7 +47,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-
     <link rel="stylesheet" href="css/style.css" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -76,7 +58,7 @@
 </head>
 <body data-page="home">
 
-<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Уведомление о файлах cookie">
+<div class="cookie-banner" id="cookieBanner">
     <p>🍪 Я использую файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с этим. Вы можете <a href="legal.html">ознакомиться с политикой</a>.</p>
     <div class="cookie-buttons">
         <button type="button" class="cookie-btn accept" onclick="acceptCookies()">Принять</button>
@@ -117,7 +99,8 @@
 <header class="header" id="header">
     <div class="container header-inner">
         <a class="logo" href="index.html">
-            <img src="logo.png" alt="Логотип Вышивка Стиль" width="120" height="40" />
+            <!-- ВОЗВРАЩАЕМ ССЫЛКУ С GITHUB -->
+            <img src="https://raw.githubusercontent.com/imaklain-pixel/Vishivka_Stile_/main/logo.png" alt="Логотип Вышивка Стиль" />
             <span class="logo-gradient">Вышивка Стиль</span>
         </a>
         <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Открыть меню">☰</button>
@@ -217,7 +200,7 @@
                 </a>
             </div>
 
-            <!-- ====== АНОНС БЛОГА (КЛИКАБЕЛЬНЫЙ) ====== -->
+            <!-- ====== БЛОК БЛОГА (АНОНС) ====== -->
             <section class="blog-prep" id="blog-prep">
                 <h2 class="section-title">📖 Полезное перед заказом</h2>
                 <p class="section-subtitle">Что прислать и почему отрывной стабилизатор лучше бумажного</p>
@@ -248,7 +231,8 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-logo">
-            <img src="logo.png" alt="Логотип Вышивка Стиль" width="90" height="30" loading="lazy" />
+            <!-- ВОЗВРАЩАЕМ ССЫЛКУ С GITHUB -->
+            <img src="https://raw.githubusercontent.com/imaklain-pixel/Vishivka_Stile_/main/logo.png" alt="Логотип Вышивка Стиль" width="90" height="30" loading="lazy" />
         </div>
         <div class="footer-divider"></div>
         <div class="footer-nav">
