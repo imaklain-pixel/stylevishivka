@@ -34,7 +34,7 @@
 
 <!-- COOKIE -->
 <div class="cookie-banner" id="cookieBanner">
-    <p>🍪 Я использую файлы cookie для улучшения работы сайта. <a href="legal.html" style="color: var(--color-primary);">Ознакомиться с политикой</a>.</p>
+    <p>🍪 Для статистики посещений используется Яндекс.Метрика. Счётчик загружается только после вашего согласия. <a href="legal.html#privacy" style="color: var(--color-primary);">Подробнее</a>.</p>
     <div class="cookie-buttons">
         <button class="cookie-btn accept" onclick="acceptCookies()">Принять</button>
         <button class="cookie-btn reject" onclick="rejectCookies()">Отказаться</button>
@@ -102,56 +102,64 @@
     <section class="page active">
         <div class="container">
             <h1 class="page-title">Юридическая информация</h1>
-            <p class="page-subtitle">Всё по закону — работаю официально как самозанятый с чеками</p>
+            <p class="page-subtitle">Сведения об обработке персональных данных, условиях использования сайта и реквизитах</p>
 
             <div style="background: linear-gradient(135deg, rgba(52,199,89,0.06), rgba(139,92,246,0.06)); border-radius: var(--radius-lg); padding: var(--space-xl); margin-bottom: var(--space-xl); border: 1px solid rgba(52,199,89,0.1);">
                 <div style="display:flex; align-items:center; gap:var(--space-md); flex-wrap:wrap;">
                     <span style="font-size:3rem;">🧾</span>
                     <div>
-                        <h3 style="font-weight:700; color:var(--color-text);">Работаю официально — с чеком и договором</h3>
-                        <p style="color:var(--color-text-secondary); margin:0;">💳 Я оказываю услуги по нанесению рисунков на одежду. После оплаты вы получаете официальный чек из приложения <strong>«Мой налог»</strong> (ФНС). Для юрлиц и ИП заключаю договор ГПХ и выставляю счёт.</p>
+                        <h3 style="font-weight:700; color:var(--color-text);">Работаю как плательщик налога на профессиональный доход</h3>
+                        <p style="color:var(--color-text-secondary); margin:0;">💳 После оплаты формирую чек в приложении <strong>«Мой налог»</strong>. Условия и документы для конкретного заказа согласую с клиентом до начала работы.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 1. ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ -->
-            <div style="background:rgba(255,255,255,0.5); backdrop-filter:var(--blur-bg); border-radius:var(--radius-md); padding:var(--space-xl); border:1px solid rgba(255,255,255,0.3); margin-bottom:var(--space-lg);">
-                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">1. Политика конфиденциальности</h2>
-                <p style="color:var(--color-text-secondary);">Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта <strong style="color:var(--color-text);">Вышивка Стиль</strong>.</p>
+            <!-- 1. ПОЛИТИКА ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ -->
+            <div id="privacy" style="background:rgba(255,255,255,0.5); backdrop-filter:var(--blur-bg); border-radius:var(--radius-md); padding:var(--space-xl); border:1px solid rgba(255,255,255,0.3); margin-bottom:var(--space-lg);">
+                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">1. Политика обработки персональных данных</h2>
+                <p style="color:var(--color-text-secondary);">Оператор персональных данных: самозанятый Ёлдашев Максим Джорагелдиевич, ИНН 130100811452 (далее — «Оператор»). Сайт: <strong style="color:var(--color-text);">https://stylevishivka.ru</strong>. Для обращений по вопросам персональных данных: <a href="mailto:svysivka@gmail.com">svysivka@gmail.com</a>, телефон <a href="tel:+79014030785">+7 (901) 403-07-85</a>. Адрес, опубликованный для связи на сайте: Москва, ул. Исаковского, д. 20, к. 2.</p>
 
-                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.1. Какие данные я собираю</h4>
-                <p style="color:var(--color-text-secondary);">При заполнении форм на Сайте я собираю: <strong style="color:var(--color-text);">имя, номер телефона и текст сообщения/отзыва</strong>.</p>
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.1. Какие данные обрабатываются</h4>
+                <p style="color:var(--color-text-secondary);">При отправке заявки я получаю номер телефона, текст сообщения и выбранный тип услуги. Если вы добровольно укажете в сообщении дополнительные сведения, они также могут быть обработаны для ответа на обращение. Имя в форме заказа не запрашивается.</p>
+                <p style="color:var(--color-text-secondary);">При посещении сайта могут обрабатываться технические сведения: IP-адрес, данные браузера и устройства, дата и время посещения, адреса просмотренных страниц и действия на сайте. Яндекс.Метрика загружается только после выбора «Принять» в уведомлении об аналитике.</p>
 
-                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.2. Цели обработки данных</h4>
-                <p style="color:var(--color-text-secondary);">Ваши данные используются исключительно для связи с вами, уточнения деталей заказа, информирования о статусе выполнения заказа и публикации отзывов (с вашего согласия).</p>
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.2. Цели и основания обработки</h4>
+                <p style="color:var(--color-text-secondary);">Данные из заявки используются, чтобы связаться с вами, ответить на вопросы, уточнить параметры и стоимость заказа, подготовить и исполнить договорённости, а также выполнить обязанности, установленные законом. Технические сведения и статистика посещений используются для защиты сайта и анализа его работы — аналитика Яндекс.Метрики включается только после вашего согласия.</p>
 
-                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.3. Передача данных третьим лицам</h4>
-                <p style="color:var(--color-text-secondary);">Я <strong style="color:var(--color-text);">не передаю</strong> ваши персональные данные третьим лицам.</p>
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.3. Как обрабатываются и кому передаются данные</h4>
+                <p style="color:var(--color-text-secondary);">Заявка с сайта передаётся через сервис Cloudflare Workers и доставляется мне в Telegram, чтобы я мог получить обращение и связаться с вами. Эти сервисы участвуют в технической передаче и получении сообщения. Яндекс.Метрика используется для статистики только после согласия на аналитику. Сайт также загружает веб-шрифты Google Fonts; при обращении к внешнему ресурсу его поставщик может получать технические данные, необходимые для соединения.</p>
+                <p style="color:var(--color-text-secondary);">Поэтому утверждение о том, что данные вообще не передаются третьим лицам, не применяется. Условия и география обработки техническими поставщиками определяются их инфраструктурой и документами. До использования внешних сервисов оператору необходимо отдельно проверить договорные условия, локализацию баз данных и наличие законных оснований для возможной трансграничной передачи.</p>
 
-                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.4. Срок хранения данных</h4>
-                <p style="color:var(--color-text-secondary);">Ваши персональные данные хранятся <strong style="color:var(--color-text);">3 года</strong> с момента последней коммуникации.</p>
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.4. Сроки обработки и хранения</h4>
+                <p style="color:var(--color-text-secondary);">Данные заявки обрабатываются столько, сколько необходимо для ответа, выполнения заказа и связанных с ним обязанностей. Документы, которые необходимо хранить по закону, сохраняются в установленные для них сроки. После достижения целей данные удаляются или обезличиваются, если дальнейшее хранение не требуется по закону или для защиты прав и законных интересов сторон. Сроки хранения в сторонних сервисах также зависят от их настроек и правил.</p>
 
-                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.5. Ваши права</h4>
-                <p style="color:var(--color-text-secondary);">Вы имеете право требовать удаления ваших данных из моей системы, написав мне на email: <a href="mailto:svysivka@gmail.com">svysivka@gmail.com</a>.</p>
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.5. Cookie и аналитика</h4>
+                <p style="color:var(--color-text-secondary);">Сайт сохраняет в браузере ваш выбор относительно аналитики. При выборе «Принять» загружается Яндекс.Метрика, которая может использовать cookie и аналогичные технологии для подсчёта посещений и анализа действий на сайте. При выборе «Отказаться» счётчик не загружается. Вы можете изменить выбор, очистив данные сайта в настройках браузера.</p>
+
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.6. Ваши права и обращения</h4>
+                <p style="color:var(--color-text-secondary);">Вы можете запросить сведения об обработке своих данных, потребовать их уточнения, блокирования или удаления при наличии предусмотренных законом оснований, а также отозвать согласие. Для этого напишите на <a href="mailto:svysivka@gmail.com">svysivka@gmail.com</a> или позвоните по номеру <a href="tel:+79014030785">+7 (901) 403-07-85</a>. Отзыв согласия не исключает обработку, для которой имеется иное законное основание.</p>
+
+                <h4 style="font-weight:600; margin-top:var(--space-md); color:var(--color-text);">1.7. Защита данных</h4>
+                <p style="color:var(--color-text-secondary);">Я принимаю организационные и технические меры для защиты информации от неправомерного доступа, изменения, раскрытия или уничтожения. Доступ к заявкам ограничивается лицами, которым он необходим для обработки обращения и выполнения заказа.</p>
+                <p style="color:var(--color-text-secondary); margin-top:var(--space-md); font-size:0.85rem;">Дата обновления: 21 ноября 2026 г.</p>
             </div>
 
             <!-- 2. ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ -->
             <div style="background:rgba(255,255,255,0.5); backdrop-filter:var(--blur-bg); border-radius:var(--radius-md); padding:var(--space-xl); border:1px solid rgba(255,255,255,0.3); margin-bottom:var(--space-lg);">
-                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">2. Пользовательское соглашение</h2>
+                <h2 id="agreement" style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">2. Пользовательское соглашение</h2>
                 <p style="color:var(--color-text-secondary);">Используя Сайт, вы соглашаетесь с условиями настоящего Соглашения. Все материалы Сайта защищены законодательством РФ. Копирование без согласия правообладателя запрещено.</p>
             </div>
 
-            <!-- 3. СОГЛАСИЕ НА ОБРАБОТКУ ПД -->
+            <!-- 3. ОТДЕЛЬНОЕ СОГЛАСИЕ -->
             <div style="background:rgba(255,255,255,0.5); backdrop-filter:var(--blur-bg); border-radius:var(--radius-md); padding:var(--space-xl); border:1px solid rgba(255,255,255,0.3); margin-bottom:var(--space-lg);">
-                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">3. Согласие на обработку персональных данных</h2>
-                <p style="color:var(--color-text-secondary);">Отправляя форму на Сайте, вы даёте своё <strong style="color:var(--color-text);">согласие на обработку персональных данных</strong> в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».</p>
-                <p style="color:var(--color-text-secondary); margin-top:var(--space-sm);">Вы можете отозвать согласие, направив уведомление на email: <a href="mailto:svysivka@gmail.com">svysivka@gmail.com</a>.</p>
-                <p style="color:var(--color-text-secondary); margin-top:var(--space-sm); font-size:0.9rem;"><strong>Важно:</strong> отказ от согласия не препятствует обработке данных, необходимых для исполнения договора (п. 5 ч. 1 ст. 6 152-ФЗ).</p>
+                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">3. Отдельное согласие на обработку персональных данных</h2>
+                <p style="color:var(--color-text-secondary);">Текст согласия размещён отдельно от Политики и Пользовательского соглашения. Перед отправкой заявки ознакомьтесь с ним и подтвердите согласие отдельной галочкой в форме.</p>
+                <p><a href="consent.html">Открыть отдельное согласие на обработку персональных данных →</a></p>
             </div>
 
             <!-- 4. РЕКВИЗИТЫ -->
             <div style="background:rgba(255,255,255,0.5); backdrop-filter:var(--blur-bg); border-radius:var(--radius-md); padding:var(--space-xl); border:1px solid rgba(255,255,255,0.3);">
-                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">4. Реквизиты самозанятого</h2>
+                <h2 style="font-size:1.3rem; font-weight:700; color:var(--color-primary); margin-bottom:var(--space-md);">4. Реквизиты</h2>
                 <ul style="color:var(--color-text-secondary); padding-left:var(--space-lg);">
                     <li><strong style="color:var(--color-text);">Статус:</strong> Самозанятый (плательщик налога на профессиональный доход)</li>
                     <li><strong style="color:var(--color-text);">ФИО:</strong> Ёлдашев Максим Джорагелдиевич</li>
@@ -160,7 +168,7 @@
                     <li><strong style="color:var(--color-text);">Телефон:</strong> <a href="tel:+79014030785">+7 (901) 403-07-85</a></li>
                     <li><strong style="color:var(--color-text);">Email:</strong> <a href="mailto:svysivka@gmail.com">svysivka@gmail.com</a></li>
                 </ul>
-                <p style="color:var(--color-text-secondary); margin-top:var(--space-md); font-size:0.85rem;">Дата публикации: 15 августа 2026 г.</p>
+                <p style="color:var(--color-text-secondary); margin-top:var(--space-md); font-size:0.85rem;">Дата обновления: 21 ноября 2026 г.</p>
             </div>
         </div>
     </section>
@@ -186,9 +194,9 @@
             <a href="legal.html">Юридическая</a>
         </div>
         <div class="footer-legal">
-            <a href="legal.html">Политика конфиденциальности</a>
-            <a href="legal.html">Пользовательское соглашение</a>
-            <a href="legal.html">Согласие на обработку</a>
+            <a href="legal.html#privacy">Политика обработки персональных данных</a>
+            <a href="legal.html#agreement">Пользовательское соглашение</a>
+            <a href="consent.html">Согласие на обработку данных</a>
         </div>
         <p>© 2026 Вышивка Стиль. Все права защищены.</p>
         <p style="font-size:0.8rem; opacity:0.7; margin-top:4px;"><a href="mailto:svysivka@gmail.com">svysivka@gmail.com</a> · <a href="tel:+79014030785">+7 (901) 403-07-85</a> · <a href="https://yandex.ru/maps/org/vyshivka_stil/22709636031/" target="_blank" rel="noopener">Мы на Яндекс.Картах</a></p>
@@ -218,7 +226,7 @@
             </div>
             <div class="form-checkbox">
                 <input type="checkbox" id="orderConsent" required />
-                <label for="orderConsent">Я даю согласие на обработку персональных данных. <a href="legal.html">Подробнее</a></label>
+                <label for="orderConsent">Я даю отдельное согласие на обработку персональных данных. <a href="consent.html">Прочитать текст согласия</a>. Также доступна <a href="legal.html#privacy">Политика обработки данных</a>.</label>
             </div>
             <button type="submit" class="btn btn-primary-solid" style="width:100%;">🚀 Отправить заявку</button>
         </form>
@@ -235,19 +243,7 @@
 <!-- СКРИПТЫ -->
 <script src="js/main.js"></script>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112953359', 'ym');
 
-    ym(112953359, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/112953359" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 
 </body>
 </html>

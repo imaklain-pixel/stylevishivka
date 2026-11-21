@@ -67,19 +67,49 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.validatePhone = validatePhone;
 
-    /* ===== COOKIE-БАННЕР ===== */
+    /* ===== COOKIE-БАННЕР И СОГЛАСИЕ НА АНАЛИТИКУ ===== */
     var cookieBanner = document.getElementById('cookieBanner');
-    if (cookieBanner && localStorage.getItem('cookiesAccepted') === null && localStorage.getItem('cookiesRejected') === null) {
-        cookieBanner.classList.add('active');
+    var cookieChoice = localStorage.getItem('cookieConsent') ||
+        (localStorage.getItem('cookiesAccepted') === 'true' ? 'accepted' :
+        (localStorage.getItem('cookiesRejected') === 'true' ? 'rejected' : null));
+    var yandexMetrikaLoaded = false;
+
+    function loadYandexMetrika() {
+        if (yandexMetrikaLoaded || cookieChoice !== 'accepted') return;
+        yandexMetrikaLoaded = true;
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j=0; j<document.scripts.length; j++) {
+                if (document.scripts[j].src === r) return;
+            }
+            k=e.createElement(t); a=e.getElementsByTagName(t)[0];
+            k.async=1; k.src=r; a.parentNode.insertBefore(k,a);
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=112953359', 'ym');
+        window.ym(112953359, 'init', {
+            ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer",
+            referrer:document.referrer, url:location.href,
+            accurateTrackBounce:true, trackLinks:true
+        });
     }
 
+    if (cookieBanner && !cookieChoice) cookieBanner.classList.add('active');
+    if (cookieChoice === 'accepted') loadYandexMetrika();
+
     window.acceptCookies = function() {
-        localStorage.setItem('cookiesAccepted', 'true');
+        cookieChoice = 'accepted';
+        localStorage.setItem('cookieConsent', cookieChoice);
+        localStorage.removeItem('cookiesAccepted');
+        localStorage.removeItem('cookiesRejected');
+        loadYandexMetrika();
         if (cookieBanner) cookieBanner.classList.remove('active');
     };
 
     window.rejectCookies = function() {
-        localStorage.setItem('cookiesRejected', 'true');
+        cookieChoice = 'rejected';
+        localStorage.setItem('cookieConsent', cookieChoice);
+        localStorage.removeItem('cookiesAccepted');
+        localStorage.removeItem('cookiesRejected');
         if (cookieBanner) cookieBanner.classList.remove('active');
     };
 
@@ -302,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 '📂 *Тип услуги:* ' + escapeMarkdown(type) + '\n' +
                 '💬 *Описание:* ' + escapeMarkdown(message) + '\n' +
                 '🎰 *Результат барабана:* ' + escapeMarkdown(wheelResultText) + '\n' +
-                '📋 *Согласие на ПД:* ✅ Да\n' +
+                '📋 *Согласие на ПД:* ✅ Да (редакция от 21.11.2026)\n' +
                 '🕐 *Время:* ' + new Date().toLocaleString('ru-RU');
 
             sendToTelegram(text);
