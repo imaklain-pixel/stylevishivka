@@ -52,6 +52,7 @@ async function checkViewport(name, viewport) {
     console.log(`PASS ${name} / ${category.title}: ${count} изображений`);
   }
 
+  await page.locator('.category-card').first().click();
   const firstImage = page.locator('#gallery-hats img').first();
   await firstImage.scrollIntoViewIfNeeded();
   await firstImage.click();
