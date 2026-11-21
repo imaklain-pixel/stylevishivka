@@ -13,12 +13,24 @@ document.addEventListener('DOMContentLoaded', function() {
         var container = document.getElementById(containerId);
         if (!container) return;
 
-        images.forEach(function(src) {
+        images.forEach(function(src, index) {
             var el = document.createElement('div');
+            var img = document.createElement('img');
+            var label = document.createElement('div');
+
             el.className = 'gallery-item';
-            el.innerHTML =
-                '<img src="' + src + '" alt="' + alt + '" onclick="openLightbox(\'' + src + '\')">' +
-                '<div class="caption">' + caption + '</div>';
+            img.src = src;
+            img.alt = alt + ' — пример работы ' + (index + 1);
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.addEventListener('click', function() {
+                openLightbox(src);
+            });
+
+            label.className = 'caption';
+            label.textContent = caption;
+            el.appendChild(img);
+            el.appendChild(label);
             container.appendChild(el);
         });
     }
