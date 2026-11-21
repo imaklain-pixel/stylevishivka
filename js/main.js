@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var hpField = this.querySelector('input[name^="hp_"]');
                 if (hpField && hpField.value !== '') {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     console.warn('🛡️ Honeypot сработал — бот заблокирован');
                     alert('⚠️ Обнаружена подозрительная активность. Попробуйте позже.');
                     return false;
@@ -400,6 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     var elapsed = Date.now() - parseInt(startField.value, 10);
                     if (elapsed < 5000) {
                         e.preventDefault();
+                        e.stopImmediatePropagation();
                         console.warn('🛡️ Слишком быстрая отправка — бот');
                         alert('⚠️ Заполните форму внимательнее. Пожалуйста, подождите 5 секунд.');
                         return false;
@@ -411,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var lastSubmit = parseInt(sessionStorage.getItem('lastSubmitTime') || '0', 10);
                 if (now - lastSubmit < 10000) {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     alert('⚠️ Слишком много заявок. Подождите 10 секунд.');
                     return false;
                 }
