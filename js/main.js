@@ -203,25 +203,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* ===== ОТПРАВКА В TELEGRAM (через Worker) ===== */
     window.sendToTelegram = function(text) {
-        if (!canSubmit()) return;
+        if (!canSubmit()) return Promise.resolve(false);
+
         var btns = document.querySelectorAll('button[type="submit"]');
         btns.forEach(function(btn) {
             btn.disabled = true;
             btn.textContent = '⏳ Отправка...';
         });
+
         return fetch(WORKER_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
         })
-        .then(function(r) { return r.json(); })
+        .then(function(response) {
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            return response.json();
+        })
         .then(function(data) {
-            if (data.success) { console.log('✅ Отправлено'); }
-            else { console.error('❌ Ошибка:', data); alert('⚠️ Ошибка отправки.'); }
+            if (data && data.success === true) {
+                console.log('✅ Заявка доставлена');
+                return true;
+            }
+            throw new Error('Сервер не подтвердил отправку');
         })
         .catch(function(err) {
-            console.error('❌ Ошибка:', err);
-            alert('⚠️ Ошибка соединения.');
+            console.error('❌ Ошибка отправки:', err);
+            alert('⚠️ Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь со мной через мессенджер.');
+            return false;
         })
         .finally(function() {
             btns.forEach(function(btn) {
@@ -305,17 +314,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 '📋 *Согласие на ПД:* ✅ Да\n' +
                 '🕐 *Время:* ' + new Date().toLocaleString('ru-RU');
 
-            sendToTelegram(text);
+            sendToTelegram(text).then(function(sent) {
+                if (!sent) return;
 
-            orderForm.style.display = 'none';
-            orderSuccess.style.display = 'block';
-            setTimeout(function() {
-                orderForm.style.display = 'block';
-                orderSuccess.style.display = 'none';
-                orderForm.reset();
-                addCSRFTokenToForms();
-                closeModal('orderModal');
-            }, 3000);
+                orderForm.style.display = 'none';
+                orderSuccess.style.display = 'block';
+
+                setTimeout(function() {
+                    orderForm.style.display = 'block';
+                    orderSuccess.style.display = 'none';
+                    orderForm.reset();
+                    addCSRFTokenToForms();
+                    closeModal('orderModal');
+                }, 3000);
+            });
         });
     }
 
@@ -343,22 +355,10 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     'use strict';
 
-    /* Блокировка ботов по User-Agent */
+    /* Не блокируем посетителей и поисковых роботов по User-Agent.
+       Поисковые системы используют строки Googlebot/YandexBot; блокировка
+       по подстроке "bot" может скрыть содержимое сайта от индексации. */
     function blockBadBots() {
-        var ua = navigator.userAgent || '';
-        var badBots = [
-            'python', 'curl', 'wget', 'scrapy', 'http.client',
-            'bot', 'crawler', 'spider', 'scanner', 'nmap',
-            'nikto', 'sqlmap', 'burp', 'zap', 'headless'
-        ];
-        var lowerUA = ua.toLowerCase();
-        for (var i = 0; i < badBots.length; i++) {
-            if (lowerUA.includes(badBots[i])) {
-                document.body.innerHTML = '<h1>Доступ запрещён</h1><p>Ваш браузер не поддерживается.</p>';
-                console.warn('🛡️ Бот заблокирован по User-Agent');
-                return true;
-            }
-        }
         return false;
     }
 
@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var hpField = this.querySelector('input[name^="hp_"]');
                 if (hpField && hpField.value !== '') {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     console.warn('🛡️ Honeypot сработал — бот заблокирован');
                     alert('⚠️ Обнаружена подозрительная активность. Попробуйте позже.');
                     return false;
@@ -400,6 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     var elapsed = Date.now() - parseInt(startField.value, 10);
                     if (elapsed < 5000) {
                         e.preventDefault();
+                        e.stopImmediatePropagation();
                         console.warn('🛡️ Слишком быстрая отправка — бот');
                         alert('⚠️ Заполните форму внимательнее. Пожалуйста, подождите 5 секунд.');
                         return false;
@@ -411,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var lastSubmit = parseInt(sessionStorage.getItem('lastSubmitTime') || '0', 10);
                 if (now - lastSubmit < 10000) {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     alert('⚠️ Слишком много заявок. Подождите 10 секунд.');
                     return false;
                 }
@@ -469,12 +472,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* Запуск всех защит */
-    if (!blockBadBots()) {
-        protectForms();
-        sanitizeAllInputs();
-        addSecondHoneypot();
-        preventDuplicateSubmissions();
+    protectForms();
+    sanitizeAllInputs();
+    addSecondHoneypot();
+    preventDuplicateSubmissions();
 
-        console.log('🛡️ Защиты активированы: honeypot, тайминг, анти-флуд, User-Agent, Referer, дубликаты');
-    }
+    console.log('🛡️ Защиты форм активированы: honeypot, тайминг, анти-флуд и защита от повторной отправки');
 })();
