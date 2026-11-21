@@ -48,4 +48,4 @@ Allow: /
 Sitemap: https://stylevishivka.ru/sitemap.xml
 
 # ===== ХОСТ =====
-Host: https://stylevishivka.ru
+Host: stylevishivka.ru
