@@ -10,7 +10,8 @@ async function checkViewport(name, viewport) {
   const context = await browser.newContext({ viewport });
   const page = await context.newPage();
   page.on('pageerror', error => pageErrors.push(`${name}: ${error.message}`));
-  await page.goto('http://127.0.0.1:4173/portfolio.html', { waitUntil: 'networkidle' });
+  const response = await page.goto('http://127.0.0.1:4173/portfolio.html', { waitUntil: 'networkidle' });
+  console.log(`DEBUG ${name}: status=${response?.status()} url=${page.url()} title=${await page.title()} body=${(await page.locator('body').innerText()).slice(0, 700)}`);
 
   const categories = [
     { id: 'hats', title: 'Кепки' },
