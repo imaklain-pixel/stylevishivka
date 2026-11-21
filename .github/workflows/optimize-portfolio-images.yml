@@ -1,0 +1,50 @@
+name: Optimize portfolio images
+
+on:
+  push:
+    branches:
+      - assets/optimize-portfolio-images
+    paths:
+      - .github/workflows/optimize-portfolio-images.yml
+      - scripts/optimize-portfolio-images.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-portfolio-images
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: assets/optimize-portfolio-images
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install image processor
+        run: npm install --no-save --package-lock=false sharp
+
+      - name: Download and optimize gallery images
+        run: node scripts/optimize-portfolio-images.mjs
+
+      - name: Commit optimized images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/portfolio.js assets/images
+          if git diff --cached --quiet; then
+            echo "No image changes to commit."
+          else
+            git commit -m "Optimize portfolio photos as WebP"
+            git push origin HEAD:assets/optimize-portfolio-images
+          fi
