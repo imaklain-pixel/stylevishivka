@@ -1,0 +1,57 @@
+name: Portfolio preview QA
+
+on:
+  push:
+    branches:
+      - assets/optimize-portfolio-images
+    paths:
+      - '.github/workflows/portfolio-preview-qa.yml'
+      - 'scripts/qa-portfolio-preview.mjs'
+      - 'portfolio.html'
+      - 'js/portfolio.js'
+      - 'js/main.js'
+      - 'css/style.css'
+      - 'assets/images/**'
+
+permissions:
+  contents: read
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout preview branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start local preview server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/portfolio-preview.log 2>&1 &
+          for attempt in {1..20}; do
+            if curl --silent --fail http://127.0.0.1:4173/portfolio.html > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/portfolio-preview.log
+          exit 1
+
+      - name: Test desktop and mobile galleries
+        run: node scripts/qa-portfolio-preview.mjs
+
+      - name: Upload browser screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-preview-screenshots
+          path: artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
