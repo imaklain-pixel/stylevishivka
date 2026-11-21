@@ -7,7 +7,7 @@ const failures = [];
 const pageErrors = [];
 
 async function checkViewport(name, viewport) {
-  const context = await browser.newContext({ viewport });
+  const context = await browser.newContext({ viewport, userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' });
   const page = await context.newPage();
   page.on('pageerror', error => pageErrors.push(`${name}: ${error.message}`));
   const response = await page.goto('http://127.0.0.1:4173/portfolio.html', { waitUntil: 'networkidle' });
