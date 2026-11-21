@@ -204,18 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function saveReview() {
-            /* Сохраняем в localStorage (для модерации) */
-            pendingReviews[reviewId] = {
-                name: name,
-                rating: rating,
-                text: text,
-                photos: photoData,
-                timestamp: new Date().toISOString(),
-                status: 'pending'
-            };
-            localStorage.setItem('pendingReviews', JSON.stringify(pendingReviews));
-
-            /* Формируем сообщение в Telegram */
+            /* Формируем сообщение для отправки на модерацию */
             var stars = '⭐'.repeat(parseInt(rating)) + '☆'.repeat(5 - parseInt(rating));
             var msg =
                 '⭐ *НОВЫЙ ОТЗЫВ (МОДЕРАЦИЯ)!*\n\n' +
@@ -236,37 +225,52 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('photo_' + i, file);
             });
 
+            var submitButton = reviewForm.querySelector('button[type="submit"]');
+            if (submitButton) submitButton.disabled = true;
+
             fetch(window.WORKER_URL, {
                 method: 'POST',
                 body: formData
             })
-            .then(function(r) { return r.json(); })
+            .then(function(response) {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
             .then(function(data) {
-                if (data.success) {
-                    console.log('✅ Отзыв отправлен на модерацию с ' +
-                        (selectedFiles.length || 0) + ' фото');
-                } else {
-                    console.error('❌ Ошибка:', data);
-                    alert('⚠️ Ошибка отправки. Попробуйте позже.');
+                if (!data || data.success !== true) {
+                    throw new Error('Сервер не подтвердил получение отзыва');
                 }
+
+                /* Сохраняем локальную запись только после подтверждения Worker */
+                pendingReviews[reviewId] = {
+                    name: name,
+                    rating: rating,
+                    text: text,
+                    photos: photoData,
+                    timestamp: new Date().toISOString(),
+                    status: 'pending'
+                };
+                localStorage.setItem('pendingReviews', JSON.stringify(pendingReviews));
+
+                reviewForm.style.display = 'none';
+                reviewSuccess.style.display = 'block';
+                setTimeout(function() {
+                    reviewForm.style.display = 'block';
+                    reviewSuccess.style.display = 'none';
+                    reviewForm.reset();
+                    selectedFiles = [];
+                    filePreview.innerHTML = '';
+                    if (reviewCounter) reviewCounter.textContent = '0 / 1000';
+                    window.addCSRFTokenToForms();
+                }, 5000);
             })
             .catch(function(error) {
-                console.error('❌ Ошибка соединения:', error);
-                alert('⚠️ Ошибка соединения. Проверьте интернет.');
+                console.error('❌ Ошибка отправки отзыва:', error);
+                alert('⚠️ Не удалось отправить отзыв. Попробуйте ещё раз или свяжитесь со мной напрямую.');
+            })
+            .finally(function() {
+                if (submitButton) submitButton.disabled = false;
             });
-
-            /* Показываем «спасибо» */
-            reviewForm.style.display = 'none';
-            reviewSuccess.style.display = 'block';
-            setTimeout(function() {
-                reviewForm.style.display = 'block';
-                reviewSuccess.style.display = 'none';
-                reviewForm.reset();
-                selectedFiles = [];
-                filePreview.innerHTML = '';
-                if (reviewCounter) reviewCounter.textContent = '0 / 1000';
-                window.addCSRFTokenToForms();
-            }, 5000);
         }
     });
 
