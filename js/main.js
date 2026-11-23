@@ -60,9 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function validatePhone(phone) {
         var digits = phone.replace(/\D/g, '');
-        if (digits.length < 10 || digits.length > 12) return false;
-        if (digits[0] !== '7' && digits[0] !== '8') return false;
-        return true;
+        return digits.length === 11 && digits[0] === '7';
     }
     window.validatePhone = validatePhone;
 
@@ -274,20 +272,32 @@ document.addEventListener('DOMContentLoaded', function() {
     var orderPhone = document.getElementById('orderPhone');
     var orderSuccess = document.getElementById('orderSuccess');
 
-    /* Маска телефона */
+    /* Маска российского номера: принимает ввод с 9, 8 или 7 */
     if (orderPhone) {
         orderPhone.addEventListener('input', function() {
-            var val = this.value.replace(/\D/g, '');
-            if (val.length > 0) {
-                var f = '+7 (';
-                if (val.length > 1) {
-                    f += val.substring(1, 4);
-                    if (val.length >= 4) { f += ') ' + val.substring(4, 7); }
-                    if (val.length >= 7) { f += '-' + val.substring(7, 9); }
-                    if (val.length >= 9) { f += '-' + val.substring(9, 11); }
-                } else { f += val; }
-                this.value = f;
-            } else { this.value = ''; }
+            var digits = this.value.replace(/\D/g, '');
+            if (!digits) {
+                this.value = '';
+                return;
+            }
+
+            if (digits.charAt(0) === '8') {
+                digits = '7' + digits.slice(1);
+            } else if (digits.charAt(0) === '9') {
+                digits = '7' + digits;
+            } else if (digits.charAt(0) !== '7') {
+                digits = '';
+            }
+
+            digits = digits.slice(0, 11);
+            var local = digits.slice(1);
+            var formatted = digits ? '+7' : '';
+            if (local.length > 0) formatted += ' (' + local.slice(0, 3);
+            if (local.length >= 3) formatted += ')';
+            if (local.length > 3) formatted += ' ' + local.slice(3, 6);
+            if (local.length > 6) formatted += '-' + local.slice(6, 8);
+            if (local.length > 8) formatted += '-' + local.slice(8, 10);
+            this.value = formatted;
         });
     }
 
