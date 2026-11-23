@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         /* Срок окупаемости */
         var payback;
-        if (profit > 0)      payback = '1 партия';
-        else if (profit === 0) payback = '—';
-        else                 payback = 'Не окупается';
+        if (profit > 0)      payback = 'Партия прибыльна; срок окупаемости не рассчитан';
+        else if (profit === 0) payback = 'Без прибыли и убытка';
+        else                 payback = 'Партия убыточна';
 
         /* ===== ВЫВОД ===== */
         var profitEl = document.getElementById('roiResultProfit');
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('roiResultMargin').textContent = margin.toFixed(0) + '%';
         document.getElementById('roiResultPayback').textContent = payback;
         document.getElementById('roiResultText').textContent =
-            'Прибыль с одного изделия: ' + Math.round(profitPerItem).toLocaleString('ru-RU') + ' ₽';
+            'Прибыль с одного изделия: ' + Math.round(profitPerItem).toLocaleString('ru-RU') + ' ₽. Для расчёта срока окупаемости укажите первоначальные вложения и период продаж — эти данные калькулятор пока не учитывает.';
     }
 
     /* ===== СЛУШАТЕЛИ ===== */
