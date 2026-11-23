@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ''
     ];
 
-    /* ===== БРЕНДИРОВАНИЕ ОДЕЖДЫ ===== */
+    /* ===== МАШИННАЯ ВЫШИВКА НА ОДЕЖДЕ ===== */
     var clothImages = [
         'assets/images/fancywork008-07082026-0134.jpeg',
         'assets/images/fancywork008-07082026-0133.webp',
