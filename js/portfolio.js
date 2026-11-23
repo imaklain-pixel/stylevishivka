@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ===== ОТРИСОВКА ===== */
     renderGallery('gallery-hats',     hatImages,   'Кепка с логотипом',   'Кепка с логотипом');
     renderGallery('gallery-patches',  patchImages, 'Нашивка на заказ',    'Нашивка / шеврон');
-    renderGallery('gallery-clothing', clothImages, 'Логотип на одежде',   'Брендирование одежды');
+    renderGallery('gallery-clothing', clothImages, 'Машинная вышивка логотипа на одежде', 'Машинная вышивка на одежде');
 
     /* ===== ПЕРЕКЛЮЧЕНИЕ КАТЕГОРИЙ ===== */
     window.openCategory = function(category) {
