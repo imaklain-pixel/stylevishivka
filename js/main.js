@@ -26,9 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ===== САНИТАЙЗ (защита от XSS) ===== */
     function sanitizeInput(text) {
         if (!text) return '';
-        var s = text.replace(/<[^>]*>/g, '');
-        s = s.replace(/[`*_{}[\]()#+\-.!]/g, '');
-        if (s.length > 1000) s = s.substring(0, 1000) + '...';
+        var s = String(text).trim();
+        if (s.length > 1000) s = s.substring(0, 1000);
         return s;
     }
     window.sanitizeInput = sanitizeInput;
