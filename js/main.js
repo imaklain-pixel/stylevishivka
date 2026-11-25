@@ -230,41 +230,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* ===== ОТПРАВКА В TELEGRAM (через Worker) ===== */
     window.sendToTelegram = function(text) {
-        if (!canSubmit()) return Promise.resolve(false);
+        if (!canSubmit()) return false;
 
-        var btns = document.querySelectorAll('button[type="submit"]');
-        btns.forEach(function(btn) {
-            btn.disabled = true;
-            btn.textContent = '⏳ Отправка...';
-        });
-
-        return fetch(WORKER_URL, {
+        /* Отправляем запрос в фоне: интерфейс не ждёт ответа Worker. */
+        fetch(WORKER_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
-        })
-        .then(function(response) {
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            return response.json();
-        })
-        .then(function(data) {
-            if (data && data.success === true) {
-                console.log('✅ Заявка доставлена');
-                return true;
-            }
-            throw new Error('Сервер не подтвердил отправку');
-        })
-        .catch(function(err) {
-            console.error('❌ Ошибка отправки:', err);
-            alert('⚠️ Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь со мной через мессенджер.');
-            return false;
-        })
-        .finally(function() {
-            btns.forEach(function(btn) {
-                btn.disabled = false;
-                btn.textContent = btn.getAttribute('data-original-text') || '🚀 Отправить заявку';
-            });
+        }).catch(function(err) {
+            console.error('Ошибка фоновой отправки заявки:', err);
         });
+
+        return true;
     };
 
     /* ===== ФОРМА ЗАЯВКИ ===== */
@@ -353,20 +330,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 '📋 *Согласие на ПД:* ✅ Да\n' +
                 '🕐 *Время:* ' + new Date().toLocaleString('ru-RU');
 
-            sendToTelegram(text).then(function(sent) {
-                if (!sent) return;
+            if (!sendToTelegram(text)) return;
 
-                orderForm.style.display = 'none';
-                orderSuccess.style.display = 'block';
+            /* Показываем подтверждение сразу, не ожидая ответа Worker. */
+            orderForm.style.display = 'none';
+            orderSuccess.style.display = 'block';
 
-                setTimeout(function() {
-                    orderForm.style.display = 'block';
-                    orderSuccess.style.display = 'none';
-                    orderForm.reset();
-                    addCSRFTokenToForms();
-                    closeModal('orderModal');
-                }, 3000);
-            });
+            setTimeout(function() {
+                orderForm.style.display = 'block';
+                orderSuccess.style.display = 'none';
+                orderForm.reset();
+                addCSRFTokenToForms();
+                closeModal('orderModal');
+            }, 3000);
         });
     }
 
