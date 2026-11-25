@@ -3,23 +3,50 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, follow" />
-    <meta http-equiv="refresh" content="1;url=https://yandex.ru/maps/org/vyshivka_stil/22709636031/reviews/" />
-    <title>Отзывы клиентов на Яндексе — Вышивка Стиль</title>
-    <meta name="description" content="Читайте отзывы клиентов о моей работе на Яндекс Картах." />
-    <link rel="canonical" href="https://yandex.ru/maps/org/vyshivka_stil/22709636031/reviews/" />
+    <meta name="description" content="Отзывы клиентов о мастерской «Вышивка Стиль» на Яндекс Картах. Рейтинг 4,7." />
+    <link rel="canonical" href="https://stylevishivka.ru/reviews.html" />
+    <title>Отзывы клиентов на Яндекс Картах — Вышивка Стиль</title>
     <link rel="stylesheet" href="css/style.css" />
     <meta name="theme-color" content="#8B5CF6" />
+    <style>
+        .yandex-reviews-page { max-width: 760px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+        .yandex-reviews-head { text-align: center; margin-bottom: 1.5rem; }
+        .yandex-reviews-rating { display: flex; align-items: center; justify-content: center; gap: .8rem; flex-wrap: wrap; margin: 1.25rem 0; }
+        .yandex-reviews-stars { color: #f5b301; font-size: 1.6rem; letter-spacing: .08em; }
+        .yandex-reviews-frame { width: 100%; max-width: 560px; height: 800px; margin: 1.5rem auto 0; overflow: hidden; position: relative; border-radius: 12px; }
+        .yandex-reviews-frame iframe { display: block; width: 100%; height: 100%; border: 1px solid #e6e6e6; border-radius: 8px; box-sizing: border-box; background: #fff; }
+        .yandex-reviews-credit { display: block; box-sizing: border-box; text-decoration: none; color: #888; font-size: 10px; font-family: Arial, sans-serif; padding: 0 16px; position: absolute; bottom: 8px; width: 100%; left: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; max-height: 14px; white-space: nowrap; }
+        .yandex-reviews-actions { text-align: center; margin-top: 1.5rem; }
+        @media (max-width: 600px) { .yandex-reviews-page { padding: 1.5rem .75rem 3rem; } .yandex-reviews-frame { height: 800px; } }
+    </style>
 </head>
 <body>
     <main class="page active">
-        <div class="container" style="max-width:720px; padding-top:12vh; text-align:center;">
-            <h1 class="page-title">Отзывы клиентов</h1>
-            <p class="page-subtitle">Отзывы клиентов о моей работе опубликованы на Яндекс Картах.</p>
-            <p style="margin:2rem 0;">
-                <a class="btn btn-gold" href="https://yandex.ru/maps/org/vyshivka_stil/22709636031/reviews/" target="_blank" rel="noopener noreferrer">Читать отзывы на Яндексе</a>
-            </p>
-            <p><a href="index.html">Вернуться на главную</a></p>
+        <div class="container yandex-reviews-page">
+            <header class="yandex-reviews-head">
+                <h1 class="page-title">Отзывы клиентов</h1>
+                <p class="page-subtitle">Мастерская «Вышивка Стиль» · Москва</p>
+                <div class="yandex-reviews-rating">
+                    <span class="yandex-reviews-stars" aria-label="Пять звёзд">★★★★★</span>
+                    <strong>4,7</strong>
+                    <span>14 оценок на Яндекс Картах</span>
+                </div>
+                <p>Посмотрите отзывы клиентов и фотографии готовых работ. Отзывы загружаются напрямую из Яндекс Карт.</p>
+            </header>
+            <div class="yandex-reviews-frame">
+                <iframe
+                    src="https://yandex.ru/maps-reviews-widget/22709636031?comments"
+                    title="Отзывы клиентов о Вышивка Стиль на Яндекс Картах"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+                <a class="yandex-reviews-credit" href="https://yandex.ru/maps/org/vyshivka_stil/22709636031/" target="_blank" rel="noopener noreferrer">Вышивка Стиль на карте Москвы — Яндекс Карты</a>
+            </div>
+            <div class="yandex-reviews-actions">
+                <a class="btn btn-gold" href="https://yandex.ru/maps/org/vyshivka_stil/22709636031/reviews/" target="_blank" rel="noopener noreferrer">Все отзывы и написать отзыв на Яндексе</a>
+                <p style="margin-top:1.25rem;"><a href="index.html">← Вернуться на главную</a></p>
+            </div>
         </div>
     </main>
 </body>
