@@ -6,15 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     'use strict';
 
     var calcProduct = document.getElementById('calcProduct');
-    if (!calcProduct) return; // если калькулятора нет на странице — выходим
+    if (!calcProduct) return;
 
-    /* ===== РАСЧЁТ ЦЕНЫ ===== */
     function calculatePrice() {
         var product = document.getElementById('calcProduct').value;
-        var qty = parseInt(document.getElementById('calcQuantity').value);
+        var qty = parseInt(document.getElementById('calcQuantity').value, 10);
         var compl = document.getElementById('calcComplexity').value;
 
-        /* Базовая цена по типу изделия */
+        /* Базовая ориентировочная цена вышивки за изделие */
         var basePrice = 500;
         switch (product) {
             case 'Футболка':        basePrice = 300; break;
@@ -25,16 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
             default:                basePrice = 600;
         }
 
-        /* Множитель сложности */
-        var complexityMultiplier = 1;
+        /* Отрисовка дизайна — разовая стоимость на заказ */
+        var designCost = 800;
         var complexityLabel = 'Средняя';
         switch (compl) {
-            case 'simple':  complexityMultiplier = 0.7; complexityLabel = 'Простая';  break;
-            case 'medium':  complexityMultiplier = 1;   complexityLabel = 'Средняя';  break;
-            case 'complex': complexityMultiplier = 1.6; complexityLabel = 'Сложная';  break;
+            case 'simple':
+                designCost = 600;
+                complexityLabel = 'Простая';
+                break;
+            case 'medium':
+                designCost = 800;
+                complexityLabel = 'Средняя';
+                break;
+            case 'complex':
+                designCost = 1000;
+                complexityLabel = 'Сложная (от 1 000 ₽)';
+                break;
         }
 
-        /* Скидка за объём */
+        /* Скидка за объём вышивки */
         var discount = 1;
         if (qty >= 5)   discount = 0.9;
         if (qty >= 10)  discount = 0.8;
@@ -42,35 +50,27 @@ document.addEventListener('DOMContentLoaded', function() {
         if (qty >= 50)  discount = 0.6;
         if (qty >= 100) discount = 0.5;
 
-        /* Оцифровка макета — разовый платёж */
-        var programCost = 1000;
+        /* Вышивка по тиражу + отрисовка дизайна (один раз) */
+        var embroideryTotal = basePrice * qty * discount;
+        var total = embroideryTotal + designCost;
 
-        var pricePerItem = basePrice * complexityMultiplier * discount;
-        var total = qty === 1
-            ? pricePerItem + programCost
-            : pricePerItem * qty + programCost;
-
-        /* Округляем до сотен */
         total = Math.round(total / 100) * 100;
 
-        /* Вывод результата */
         document.getElementById('calcResultPrice').textContent = total.toLocaleString('ru-RU') + ' ₽';
         document.getElementById('calcResultProduct').textContent = product;
         document.getElementById('calcResultQty').textContent = qty;
         document.getElementById('calcResultComplex').textContent = complexityLabel;
+        document.getElementById('calcResultDesign').textContent = designCost.toLocaleString('ru-RU');
 
-        /* Показываем результат, скрываем placeholder */
         document.getElementById('calcPlaceholder').style.display = 'none';
         document.getElementById('calcResultContent').classList.add('active');
     }
 
-    /* ===== СЛУШАТЕЛИ ===== */
     document.getElementById('calcProduct').addEventListener('change', calculatePrice);
     document.getElementById('calcQuantity').addEventListener('change', calculatePrice);
     document.getElementById('calcComplexity').addEventListener('change', calculatePrice);
 
-    /* Первый расчёт при загрузке */
-    setTimeout(calculatePrice, 100);
+    calculatePrice();
 
-    console.log('✅ calculator.js загружен');
+    console.log('calculator.js loaded');
 });
